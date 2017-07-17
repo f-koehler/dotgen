@@ -21,6 +21,8 @@ deploy:
   password:
     secure: ULvmDYyLPlJQMNg2a6ynD3qzQqEB0pUclIU6qR8OGmsVb3th2q8JFI78l8J1gNgWsBuLLw1HgC4qKDVegzdf21tdATeuhbUwCCHVFEEPZnBLNsHvfzVbQSts6mfzrVLGKRH8/AjWkGhzuLyHq7eR0VmQWVGb3l1NxfAOWjpZfjoiZcEmwq6Nzqbyi0hB4B3AZ4bjRBv0vINQ8xiFuih/AbFBlhPV1sFYPfjqShyLoFljmrgdPoJfYagjeBo/rcABJbiG45tzuIBErJVnGLEZLItIJzqsNfXyTcyD27wnVqoX5kzfHmlhWH4fZbs6XDPZwZ6eeExyITgXTKiyTa/ccVh3o1WDGUn3b2xsSi9I8z2oViWeXBYk9D/JRWMZ4an5dBBncaKDYcWIGpHi26vvZ3VghTr+9QBCfkefkCey2R7CSIBNub5+FAJOH6ELwjcSbvW52Pcs2F2ODSVg0CMCk8jKBYy30d5VX00elH/lopfPb+ECZNBfb+ihg7VOB2mwme15siMMpqnssAcc+JNmmFyJY2m2POSE5oY/tQn4QSw9iMigm/Gne7JA5MuNMbOEMpN2EX6bLSz+OXxAy7YolPJsMud4G10GFsdUpOqOL12GQ6DUxVZDMqrbocAhHmuc7oFfYdfc0DXIb3iQVJhv7mzHKhnBTVc/L1lOBWVNHXs=
   on:
-    distributions: sdist bdist_wheel
-    repo: f-koehler/dotgen
     branch: master
+    distributions: sdist bdist_wheel
+    python: 3.6
+    repo: f-koehler/dotgen
+    tags: true
