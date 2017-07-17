@@ -10,4 +10,5 @@ setup(
     author="Fabian Köhler",
     author_email="fkoehler1024@googlemail.com",
     scripts=["./dotgen"],
-    url="https://github.com/f-koehler/dotgen")
+    url="https://github.com/f-koehler/dotgen",
+    license="MIT")

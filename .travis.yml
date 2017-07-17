@@ -18,6 +18,6 @@ script:
 
 deploy:
   - provider: pypi
-    user: f-koehler
+    user: "f-koehler"
     password:
       secure: "DUYZMRtFdzn5GMVjim5O6EQz7UNrB1h8Ro1mJ83+oKI8Rj53MK/9gsCjNF96PsnoeTa4fjCCRU/h4/8b64rQa2XVaHmuTGuiW4x+w6SNO8dmfVBx8tsI1ELHkNR03iBa3pvjCVuvslTi/5G43zdL75G1L7epewv7aqVUgVNmbZJHBnjc0J/4LR+xo/KBDQoH0BSh2HWOyPbstewW7lwYjyXxnOSQNtVT5OBBdphj6tuWutdQICdrIVnGOs/mZ8NcmUsCTynsURcJHrkzvhzAY3U2aoGIuBQulv+Zzz0OCxqYbpvhRmI4JI4AzMv0uonzWAAeT5YMu0krET/X4RuLtartocKp+e+8PqQ+geaGPMpl5jSoPbfIaklRYM3fz/G+70pdvlsf7/J9kslz/uwmhLI//3G8KFl2MVzEvkqdiPaLJINDAgHwpr0BFn1XL2NXyLXmRUrfJK73Uxt8bc0VLeU/Fhdi6YXs2s/gzwwJb0PXPrd/SrTsjNbIKqJ7sHWethiA9QIYGpo4d3pDX815VNfo0/I1v7uVN2E9lBASIsbGS9ZDxkYdjzQSMnlnRSmPq5FwCXVsJ2EFY0Dhw21p3zEhIYU1LfxBzFKTxylq8Ulgr9tEm1DjnzakNp6V8pc0jQ2PhtRfmPsfVhPmyNXVFHYWhNP55fPJK6sLZ2ltzUs="

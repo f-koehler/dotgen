@@ -92,8 +92,7 @@ def render_dotfiles(render_dir, config):
 
         cmd = ["git", "clone", url, checkout_path]
         if "depth" in config["gitmodules"][name]:
-            cmd.append("--depth=" +
-                       str(config["gitmodules"][name]["depth"]))
+            cmd.append("--depth=" + str(config["gitmodules"][name]["depth"]))
 
         proc = subprocess.Popen(
             cmd, cwd=render_dir, stdout=sys.stdout, stderr=sys.stderr)
@@ -118,8 +117,7 @@ def render_dotfiles(render_dir, config):
             if os.path.exists(dst):
                 logging.info("remove existing symlink")
                 if not os.path.islink(dst):
-                    logging.critical(
-                        "destination of symlink is not a symlink")
+                    logging.critical("destination of symlink is not a symlink")
                     raise RuntimeError
                 os.unlink(dst)
 
