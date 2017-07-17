@@ -1,23 +1,26 @@
 language: python
 python:
-  - '2.6'
-  - '2.7'
-  - '3.3'
-  - '3.4'
-  - '3.5'
-  - '3.6'
+  - 2.6
+  - 2.7
+  - 3.3
+  - 3.4
+  - 3.5
+  - 3.6
   - nightly
+cache: pip
 before_script:
-  - git clone -b jinja2 https://github.com/f-koehler/dotfiles.git ~/.dotfiles
-
+  - git clone --depth=1 -b jinja2 https://github.com/f-koehler/dotfiles.git ~/.dotfiles
 script:
   - "./dotgen list-configs"
   - "./dotgen list-templates"
   - "./dotgen preview"
   - "./dotgen clear-preview"
-
 deploy:
-  - provider: pypi
-    user: "f-koehler"
-    password:
-      secure: "DUYZMRtFdzn5GMVjim5O6EQz7UNrB1h8Ro1mJ83+oKI8Rj53MK/9gsCjNF96PsnoeTa4fjCCRU/h4/8b64rQa2XVaHmuTGuiW4x+w6SNO8dmfVBx8tsI1ELHkNR03iBa3pvjCVuvslTi/5G43zdL75G1L7epewv7aqVUgVNmbZJHBnjc0J/4LR+xo/KBDQoH0BSh2HWOyPbstewW7lwYjyXxnOSQNtVT5OBBdphj6tuWutdQICdrIVnGOs/mZ8NcmUsCTynsURcJHrkzvhzAY3U2aoGIuBQulv+Zzz0OCxqYbpvhRmI4JI4AzMv0uonzWAAeT5YMu0krET/X4RuLtartocKp+e+8PqQ+geaGPMpl5jSoPbfIaklRYM3fz/G+70pdvlsf7/J9kslz/uwmhLI//3G8KFl2MVzEvkqdiPaLJINDAgHwpr0BFn1XL2NXyLXmRUrfJK73Uxt8bc0VLeU/Fhdi6YXs2s/gzwwJb0PXPrd/SrTsjNbIKqJ7sHWethiA9QIYGpo4d3pDX815VNfo0/I1v7uVN2E9lBASIsbGS9ZDxkYdjzQSMnlnRSmPq5FwCXVsJ2EFY0Dhw21p3zEhIYU1LfxBzFKTxylq8Ulgr9tEm1DjnzakNp6V8pc0jQ2PhtRfmPsfVhPmyNXVFHYWhNP55fPJK6sLZ2ltzUs="
+  provider: pypi
+  user: f-koehler
+  password:
+    secure: ULvmDYyLPlJQMNg2a6ynD3qzQqEB0pUclIU6qR8OGmsVb3th2q8JFI78l8J1gNgWsBuLLw1HgC4qKDVegzdf21tdATeuhbUwCCHVFEEPZnBLNsHvfzVbQSts6mfzrVLGKRH8/AjWkGhzuLyHq7eR0VmQWVGb3l1NxfAOWjpZfjoiZcEmwq6Nzqbyi0hB4B3AZ4bjRBv0vINQ8xiFuih/AbFBlhPV1sFYPfjqShyLoFljmrgdPoJfYagjeBo/rcABJbiG45tzuIBErJVnGLEZLItIJzqsNfXyTcyD27wnVqoX5kzfHmlhWH4fZbs6XDPZwZ6eeExyITgXTKiyTa/ccVh3o1WDGUn3b2xsSi9I8z2oViWeXBYk9D/JRWMZ4an5dBBncaKDYcWIGpHi26vvZ3VghTr+9QBCfkefkCey2R7CSIBNub5+FAJOH6ELwjcSbvW52Pcs2F2ODSVg0CMCk8jKBYy30d5VX00elH/lopfPb+ECZNBfb+ihg7VOB2mwme15siMMpqnssAcc+JNmmFyJY2m2POSE5oY/tQn4QSw9iMigm/Gne7JA5MuNMbOEMpN2EX6bLSz+OXxAy7YolPJsMud4G10GFsdUpOqOL12GQ6DUxVZDMqrbocAhHmuc7oFfYdfc0DXIb3iQVJhv7mzHKhnBTVc/L1lOBWVNHXs=
+  on:
+    distributions: sdist bdist_wheel
+    repo: f-koehler/dotgen
+    branch: master
