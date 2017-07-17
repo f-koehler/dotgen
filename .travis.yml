@@ -1,21 +1,23 @@
 language: python
 python:
-- '2.6'
-- '2.7'
-- '3.3'
-- '3.4'
-- '3.5'
-- '3.6'
-- nightly
+  - '2.6'
+  - '2.7'
+  - '3.3'
+  - '3.4'
+  - '3.5'
+  - '3.6'
+  - nightly
 before_script:
-- git clone -b jinja2 https://github.com/f-koehler/dotfiles.git ~/.dotfiles
+  - git clone -b jinja2 https://github.com/f-koehler/dotfiles.git ~/.dotfiles
+
 script:
-- "./dotgen list-configs"
-- "./dotgen list-templates"
-- "./dotgen preview"
-- "./dotgen clear-preview"
+  - "./dotgen list-configs"
+  - "./dotgen list-templates"
+  - "./dotgen preview"
+  - "./dotgen clear-preview"
+
 deploy:
-  provider: pypi
-  user: f-koehler
-  password:
-    secure: "x6RAJbv1a2lyZvc5h6Lx5dsfaaGiHgot5H18o8++/1NkpcdHJls/JdunVc09EIeZQ8onfvtorXghgc2WF4ov5GswnnXB9U0mLa+LpTSpnxYaXgtGfweJREOGvJvasZzNUmF8lLhZPSHbIuAaXKw9mHhchRZeWHX9nFwd5ICpN43sjDPk+wUYceMqitxGTSDXBrX/vFazq7KWcTreezOhe8G7mn4Gj/qujEoGKE0cCdf7WFI7ElK/vc9FB2y5p86Ugg8xL2czRZnQFECHlSt2vm5sDQDqh9PuQxM7Eq77t0QjTcBS/osVbNPcr+E4qiOxXse57nc7PxzSxV34rhiY7aJP5qkmzvlTp8cd3xRm8V1lVE4ADBo7rIxDSVK+YiKJ70/naGdnOzAwQyRqQ3q11x5GfuhkKKi8t9a7SAvuXP+kfWmsboQf7nykUMDVvwF4gUJCWneJ7t36/W5erLlH6SlKpJz5O/XezEe4gkpNblVohehXSksKSSDnUyEfYGm3XIpoNw2TmmMKXXGX00Vp4190JrDWaWKM8V3/gb3abQMpxXyK+G8XBZIpmX21tllX7mq0Nl/NVWuqsdNvwHsSejdYJ2D8I3dYSVfPVRy7NxJwB4Lh3iOTITbBGsyghnc52P7j9vK+L0NXek+G0WAgPKes7/DO45UtwiQt1+odpOw="
+  - provider: pypi
+    user: f-koehler
+    password:
+      secure: "DUYZMRtFdzn5GMVjim5O6EQz7UNrB1h8Ro1mJ83+oKI8Rj53MK/9gsCjNF96PsnoeTa4fjCCRU/h4/8b64rQa2XVaHmuTGuiW4x+w6SNO8dmfVBx8tsI1ELHkNR03iBa3pvjCVuvslTi/5G43zdL75G1L7epewv7aqVUgVNmbZJHBnjc0J/4LR+xo/KBDQoH0BSh2HWOyPbstewW7lwYjyXxnOSQNtVT5OBBdphj6tuWutdQICdrIVnGOs/mZ8NcmUsCTynsURcJHrkzvhzAY3U2aoGIuBQulv+Zzz0OCxqYbpvhRmI4JI4AzMv0uonzWAAeT5YMu0krET/X4RuLtartocKp+e+8PqQ+geaGPMpl5jSoPbfIaklRYM3fz/G+70pdvlsf7/J9kslz/uwmhLI//3G8KFl2MVzEvkqdiPaLJINDAgHwpr0BFn1XL2NXyLXmRUrfJK73Uxt8bc0VLeU/Fhdi6YXs2s/gzwwJb0PXPrd/SrTsjNbIKqJ7sHWethiA9QIYGpo4d3pDX815VNfo0/I1v7uVN2E9lBASIsbGS9ZDxkYdjzQSMnlnRSmPq5FwCXVsJ2EFY0Dhw21p3zEhIYU1LfxBzFKTxylq8Ulgr9tEm1DjnzakNp6V8pc0jQ2PhtRfmPsfVhPmyNXVFHYWhNP55fPJK6sLZ2ltzUs="
