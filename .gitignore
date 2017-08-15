@@ -2,3 +2,4 @@
 *.pyo
 MANIFEST
 dist
+env

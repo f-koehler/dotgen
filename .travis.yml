@@ -11,10 +11,11 @@ cache: pip
 before_script:
   - git clone --depth=1 -b jinja2 https://github.com/f-koehler/dotfiles.git ~/.dotfiles
 script:
-  - "./dotgen list-configs"
-  - "./dotgen list-templates"
-  - "./dotgen preview"
-  - "./dotgen clear-preview"
+  # - "./dotgen list-configs"
+  # - "./dotgen list-templates"
+  # - "./dotgen preview"
+  # - "./dotgen clear-preview"
+  - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then pip install PyInstaller; pyinstaller --name dotgen --onefile main.py; fi
 deploy:
   provider: pypi
   user: f-koehler

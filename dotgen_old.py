@@ -13,8 +13,6 @@ import shutil
 import subprocess
 import sys
 
-# logging.basicConfig(level=logging.INFO)
-
 dotfiles_dir = os.path.join(os.path.expanduser("~"), ".dotfiles")
 template_dir = os.path.join(dotfiles_dir, "templates")
 config_dir = os.path.join(dotfiles_dir, "configs")
