@@ -1,5 +1,7 @@
 *.pyc
 *.pyo
+*.spec
 MANIFEST
+build
 dist
 env
