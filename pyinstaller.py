@@ -11,6 +11,6 @@ if __name__ == "__main__":
         print(info)
         cmd += ["--hidden-import", "dotgen.plugins." + info[1]]
 
-    cmd.append("main.py")
+    cmd.append("dotgen/__main__.py")
 
     watch_process(cmd)

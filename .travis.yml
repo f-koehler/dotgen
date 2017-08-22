@@ -17,7 +17,7 @@ script:
   - dotgen templates
   - dotgen generate --force default
   - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then pip install PyInstaller; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then pyinstaller --hidden-import dotgen.plugins --name dotgen --onefile main.py; fi
+  - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then pyinstaller --hidden-import dotgen.plugins --name dotgen --onefile dotgen/__main__.py; fi
 deploy:
   provider: pypi
   user: f-koehler
