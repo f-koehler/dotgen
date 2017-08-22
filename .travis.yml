@@ -8,6 +8,7 @@ python:
   - nightly
 cache: pip
 install:
+  - pip install -r requirements.txt
   - pip install .
 before_script:
   - git clone --depth=1 -b jinja2 https://github.com/f-koehler/dotfiles.git ~/.dotfiles

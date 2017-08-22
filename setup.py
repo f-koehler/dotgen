@@ -9,6 +9,12 @@ setup(
     description="Dotfiles generator",
     author="Fabian Köhler",
     author_email="fkoehler1024@googlemail.com",
-    scripts=["./scripts/dotgen"],
     url="https://github.com/f-koehler/dotgen",
-    license="MIT")
+    license="MIT",
+    packages=["dotgen"],
+    entry_points={
+        "console_scripts": [
+            "dotgen = dotgen.__main__:main"
+        ]
+    }
+)
