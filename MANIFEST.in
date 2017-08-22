@@ -1,1 +1,2 @@
-include dotgen
+recursive-include dotgen *.py
+include scripts/dotgen

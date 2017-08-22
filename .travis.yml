@@ -7,12 +7,14 @@ python:
   - 3.6
   - nightly
 cache: pip
+install:
+  - pip install .
 before_script:
   - git clone --depth=1 -b jinja2 https://github.com/f-koehler/dotfiles.git ~/.dotfiles
 script:
-  - python main.py configs
-  - python main.py templates
-  - python main.py generate --force default
+  - dotgen configs
+  - dotgen templates
+  - dotgen generate --force default
   - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then pip install PyInstaller; fi
   - if [[ $TRAVIS_PYTHON_VERSION == 2.7 ]]; then pyinstaller --hidden-import dotgen.plugins --name dotgen --onefile main.py; fi
 deploy:
