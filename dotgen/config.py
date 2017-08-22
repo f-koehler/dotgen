@@ -6,7 +6,15 @@ import pkgutil
 import yaml
 
 
-def get_user_dir():
+def get_default_config_dir():
+    return os.path.join(get_home_dir(), ".dotfiles", "configs")
+
+
+def get_default_template_dir():
+    return os.path.join(get_home_dir(), ".dotfiles", "templates")
+
+
+def get_home_dir():
     return os.path.expanduser("~")
 
 
@@ -30,10 +38,16 @@ def is_empty_dotfile(text):
 def list_configs(path):
     configs = []
     for config in os.listdir(path):
-        base, ext = os.path.splitext(path)
-        if ext in [".yml", ".yaml"]:
+        base, ext = os.path.splitext(config)
+        if ext == ".yml":
             configs.append(base)
     return configs
+
+
+def list_templates(path):
+    loader = jinja2.FileSystemLoader(path)
+    templates = loader.list_templates()
+    return templates
 
 
 def load_plugins():
@@ -52,10 +66,12 @@ def read_config(path):
     return complete_config["config"], complete_config["plugins"]
 
 
-def render_templates(template_path, output_path, config):
-    loader = jinja2.FileSystemLoader(path)
-    env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_path))
+def render_dotfiles(template_path, config):
+    loader = jinja2.FileSystemLoader(template_path)
+    env = jinja2.Environment(loader=loader)
     templates = loader.list_templates()
+
+    dotfiles = {}
 
     for template_name in templates:
         template = env.get_template(template_name)
@@ -63,10 +79,14 @@ def render_templates(template_path, output_path, config):
         if is_empty_dotfile(content):
             continue
 
-        path = os.path.join(output_path, template_name)
-        dir = os.path.dirname(path)
-        if not os.path.exists(dir):
-            os.makedirs(dir)
+        dotfiles[template_name] = content
 
-        with open(path, "w") as fh:
-            fh.write(content)
+    return dotfiles
+
+    #     path = os.path.join(output_path, template_name)
+    #     dir = os.path.dirname(path)
+    #     if not os.path.exists(dir):
+    #         os.makedirs(dir)
+
+    #     with open(path, "w") as fh:
+    #         fh.write(content)

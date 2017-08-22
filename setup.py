@@ -5,7 +5,7 @@ from distutils.core import setup
 
 setup(
     name="dotgen",
-    version="0.1.1",
+    version="0.1.2",
     description="Dotfiles generator",
     author="Fabian Köhler",
     author_email="fkoehler1024@googlemail.com",
