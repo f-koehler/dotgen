@@ -7,10 +7,11 @@ import sys
 
 from dotgen import config
 from dotgen import hashing
+from dotgen import plugins
 
 
 def generate(args):
-    cfg, plugins = config.read_config(
+    cfg, _ = config.read_config(
         os.path.join(args.config_dir, args.config + ".yml"))
 
     dotfiles = config.render_dotfiles(args.template_dir, cfg)
@@ -76,16 +77,23 @@ def main():
     parser.add_argument(
         "--template-dir", default=config.get_default_template_dir())
 
-    parser_generate = subparsers.add_parser(
-        "generate", help="generate dotfiles")
-    parser_generate.set_defaults(func=generate)
-    parser_generate.add_argument("config")
-    parser_generate.add_argument("-f", "--force", action="store_true")
-    parser_generate.add_argument("-o", "--output", default=config.get_home_dir())
-
     parser_configs = subparsers.add_parser(
         "configs", help="list configurations")
     parser_configs.set_defaults(func=list_configs)
+
+    parser_generate = subparsers.add_parser(
+        "generate", help="generate dotfiles")
+    parser_generate.set_defaults(func=generate)
+    parser_generate.add_argument("-f", "--force", action="store_true")
+    parser_generate.add_argument(
+        "-o", "--output", default=config.get_home_dir())
+    parser_generate.add_argument("config")
+
+    parser_plugins = subparsers.add_parser("plugins", help="execute plugins")
+    parser_plugins.set_defaults(func=execute_plugins)
+    parser_plugins.add_argument(
+        "-o", "--output", default=config.get_home_dir())
+    parser_plugins.add_argument("config")
 
     parser_templates = subparsers.add_parser(
         "templates", help="list templates")
@@ -93,6 +101,12 @@ def main():
 
     args = parser.parse_args()
     args.func(args)
+
+
+def execute_plugins(args):
+    _, plugin_cfg = config.read_config(
+        os.path.join(args.config_dir, args.config + ".yml"))
+    plugins.handle_plugins(args.output, plugin_cfg)
 
 
 if __name__ == "__main__":

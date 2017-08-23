@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
-from dotgen.process import watch_process
+# from dotgen.process import watch_process
+import subprocess
+import sys
 
 import os
 
 rank = 0
 
 
-def handle(config):
+def handle(output_dir, config):
     for gitmodule in config:
         GitModule(
-            path=config[gitmodule]["path"],
+            path=os.path.join(output_dir, config[gitmodule]["path"]),
             url=config[gitmodule]["url"],
             depth=config[gitmodule].get("depth", None)).run()
 
@@ -24,7 +26,8 @@ class GitModule:
         cmd = ["git", "clone", self.url, self.path]
         if self.depth:
             cmd += ["--depth", str(self.depth)]
-        watch_process(cmd)
+        subprocess.call(cmd, stdout=sys.stdout, stderr=sys.stderr)
+        # watch_process(cmd)
 
     def run(self):
         if os.path.exists(os.path.join(self.path, ".git")):

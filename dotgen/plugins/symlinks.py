@@ -4,20 +4,20 @@ import os
 rank = 1
 
 
-def handle(config):
+def handle(output_dir, config):
     for symlink in config:
-        Symlink(src=symlink[0], dst=symlink[1]).run()
+        Symlink(
+            src=os.path.join(output_dir, symlink[0]),
+            dst=os.path.join(output_dir, symlink[1])).run()
 
 
 class Symlink:
     def __init__(self, src, dst):
-        pass
-
-    def create(self):
-        os.link(src, dst)
+        self.src = os.path.abspath(src)
+        self.dst = os.path.abspath(dst)
 
     def run(self):
-        if os.path.exists(dst):
+        if os.path.exists(self.dst):
             return
 
-        self.create()
+        os.symlink(self.src, self.dst)
