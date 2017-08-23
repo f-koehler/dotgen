@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from dotgen.process import watch_process
 
 import os

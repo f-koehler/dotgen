@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import codecs
 import importlib
 import jinja2
@@ -68,12 +69,21 @@ def read_config(path):
 
 def render_dotfiles(template_path, config):
     loader = jinja2.FileSystemLoader(template_path)
-    env = jinja2.Environment(loader=loader)
+    env = jinja2.Environment(
+        loader=loader,
+        block_start_string="@{%",
+        block_end_string="%}@",
+        variable_start_string="@{{",
+        variable_end_string="}}@",
+        comment_start_string="@{#",
+        comment_end_string="#}@",
+        trim_blocks=True)
     templates = loader.list_templates()
 
     dotfiles = {}
 
     for template_name in templates:
+        print(template_name)
         template = env.get_template(template_name)
         content = template.render(config=config)
         if is_empty_dotfile(content):
@@ -82,11 +92,3 @@ def render_dotfiles(template_path, config):
         dotfiles[template_name] = content
 
     return dotfiles
-
-    #     path = os.path.join(output_path, template_name)
-    #     dir = os.path.dirname(path)
-    #     if not os.path.exists(dir):
-    #         os.makedirs(dir)
-
-    #     with open(path, "w") as fh:
-    #         fh.write(content)
