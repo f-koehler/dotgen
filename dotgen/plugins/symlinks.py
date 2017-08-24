@@ -20,4 +20,8 @@ class Symlink:
         if os.path.exists(self.dst):
             return
 
+        dir = os.path.dirname(self.dst)
+        if not os.path.exists(dir):
+            os.makedirs(dir)
+
         os.symlink(self.src, self.dst)

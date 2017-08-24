@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
-import hashlib
+# import hashlib
 import codecs
+import subprocess
 
 
 def hash(bytes):
-    m = hashlib.sha256()
-    m.update(bytes)
-    return m.digest()
+    process = subprocess.Popen(
+        ["sha256sum"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    stdout, _ = process.communicate(bytes)
+    return stdout.decode().strip().split()[0]
 
 
 def hash_string(string):
@@ -14,5 +16,5 @@ def hash_string(string):
 
 
 def hash_file(path):
-    with codecs.open(path, "r", "utf-8") as fhandle:
-        return hash_string(fhandle.read())
+    with codecs.open(path, "rb") as fhandle:
+        return hash(fhandle.read())
