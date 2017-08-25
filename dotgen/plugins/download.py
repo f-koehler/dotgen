@@ -34,6 +34,8 @@ def handle(output_dir, config):
             with tqdm.tqdm(total=size) as pbar:
                 for chunk in req.iter_content(chunk_size=chunk_size):
                     out = fhandle.write(chunk)
+                    if out < 0:
+                        out = 0
                     pbar.update(out)
 
         hash = hashing.hash_file(download_path)
