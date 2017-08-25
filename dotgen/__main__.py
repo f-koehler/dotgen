@@ -3,11 +3,48 @@
 import argparse
 import codecs
 import os
+import subprocess
 import sys
 
 from dotgen import config
 from dotgen import hashing
 from dotgen import plugins
+
+
+def diff(args):
+    cfg, _ = config.read_config(
+        os.path.join(args.config_dir, args.config + ".yml"))
+
+    diffs = []
+
+    dotfiles = config.render_dotfiles(args.template_dir, cfg)
+    for dotfile_name in dotfiles:
+        tmp_path = os.path.join("/tmp", "dotgen", dotfile_name)
+        tmp_dir = os.path.dirname(tmp_path)
+        output_path = os.path.join(args.output, dotfile_name)
+
+        if not os.path.exists(output_path):
+            continue
+
+        if not os.path.exists(tmp_dir):
+            os.makedirs(tmp_dir)
+
+        with codecs.open(tmp_path, "w", "utf-8") as fhandle:
+            fhandle.write(dotfiles[dotfile_name])
+
+        cmd = [
+            "git", "diff", "--color=always", "--no-index", "--", output_path,
+            tmp_path
+        ]
+        process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        out, _ = process.communicate()
+
+        out = out.decode()
+        if out:
+            diffs.append(out)
+
+    if diffs:
+        print("\n".join(diffs))
 
 
 def generate(args):
@@ -80,6 +117,12 @@ def main():
     parser_configs = subparsers.add_parser(
         "configs", help="list configurations")
     parser_configs.set_defaults(func=list_configs)
+
+    parser_diff = subparsers.add_parser(
+        "diff", help="show diff between generated and existent files")
+    parser_diff.set_defaults(func=diff)
+    parser_diff.add_argument("-o", "--output", default=config.get_home_dir())
+    parser_diff.add_argument("config")
 
     parser_generate = subparsers.add_parser(
         "generate", help="generate dotfiles")
