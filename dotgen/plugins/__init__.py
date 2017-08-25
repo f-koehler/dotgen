@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from colorama import Fore
 import importlib
 import pkgutil
 
@@ -19,4 +20,6 @@ def handle_plugins(output_dir, plugins_config):
     plugin_cfgs.sort(key=lambda cfg: cfg["rank"])
 
     for cfg in plugin_cfgs:
+        print(Fore.BLUE + "plugin: " + cfg["name"] + Fore.RESET)
         cfg["module"].handle(output_dir, cfg["config"])
+        print(Fore.BLUE + "done\n" + Fore.RESET)

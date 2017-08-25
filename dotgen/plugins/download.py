@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from colorama import Fore
 import math
 import os
 import requests
@@ -12,6 +13,7 @@ rank = 0
 
 def handle(output_dir, config):
     for download in config:
+        print(Fore.WHITE + "download: " + download + Fore.RESET)
         cfg = config[download]
         download_path = os.path.join(output_dir, cfg["path"])
 
@@ -45,3 +47,5 @@ def handle(output_dir, config):
 
         if "chmod" in cfg:
             subprocess.call(["chmod", str(cfg["chmod"]), download_path])
+
+        print(Fore.WHITE + "done\n" + Fore.RESET)

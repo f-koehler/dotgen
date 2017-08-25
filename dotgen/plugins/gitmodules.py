@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from colorama import Fore
 import os
 import re
 import subprocess
@@ -9,10 +10,12 @@ rank = 0
 
 def handle(output_dir, config):
     for gitmodule in config:
+        print(Fore.WHITE + "module: " + gitmodule + Fore.RESET)
         GitModule(
             path=os.path.join(output_dir, config[gitmodule]["path"]),
             url=config[gitmodule]["url"],
             depth=config[gitmodule].get("depth", None)).run()
+        print(Fore.WHITE + "done\n" + Fore.RESET)
 
 
 class GitModule:

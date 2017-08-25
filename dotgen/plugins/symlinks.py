@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from colorama import Fore
 import os
 
 rank = 1
@@ -6,9 +7,12 @@ rank = 1
 
 def handle(output_dir, config):
     for symlink in config:
+        print(Fore.WHITE + "symlink: {} -> {}".format(symlink[0], symlink[1]) +
+              Fore.RESET)
         Symlink(
             src=os.path.join(output_dir, symlink[0]),
             dst=os.path.join(output_dir, symlink[1])).run()
+        print(Fore.WHITE + "done\n" + Fore.RESET)
 
 
 class Symlink:
