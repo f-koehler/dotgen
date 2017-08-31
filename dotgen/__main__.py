@@ -71,18 +71,21 @@ def generate(args):
         return
 
     if not args.force:
-        print("Files that will be overwritten:")
+        print("Files that will be (over)written:")
         for dotfile_name in dotfiles_old:
             print("\t" + os.path.join(args.output, dotfile_name))
 
         if sys.version_info < (3, 0):
-            confirmation = raw_input("Overwrite (y/n) ").strip().lower()
+            confirmation = raw_input(
+                "Is this what you want? (y/n) ").strip().lower()
         else:
-            confirmation = input("Overwrite (y/n) ").strip().lower()
+            confirmation = input(
+                "Is this what you want? (y/n) ").strip().lower()
         if confirmation.lower() != "y":
             return
 
     for dotfile_name in dotfiles_old:
+        template_file_path = os.path.join(args.template_dir, dotfile_name)
         output_path = os.path.join(args.output, dotfile_name)
         dir_name = os.path.dirname(output_path)
 
@@ -91,6 +94,9 @@ def generate(args):
 
         with codecs.open(output_path, "w", "utf-8") as fhandle:
             fhandle.write(dotfiles_old[dotfile_name])
+
+        permissions = os.stat(template_file_path)
+        os.chmod(output_path, permissions[0])
 
 
 def list_configs(args):
